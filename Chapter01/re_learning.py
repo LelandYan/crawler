@@ -19,19 +19,24 @@ urllib3.disable_warnings()
 # content = requests.get("https://book.douban.com/",headers=headers,verify=False).text
 # with open("data.txt",'w',encoding='utf-8') as f:
 #     f.write(content)
-with open('data.txt','r',encoding='utf8') as f:
-    content = f.read()
-    print(type(content))
+# with open('data.txt','r',encoding='utf8') as f:
+#     content = f.read()
+#     print(type(content))
     # pattern = re.compile('<li.*?cover.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(>*?)</span>.*?</li>',re.S)
     # results = re.findall(pattern,content)
     # for result in results:
     #    print(result)
-    pattern = re.compile(
-        '<li.*?cover.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(.*?)</span>.*?</li>',
-        re.S)
-    results = re.findall(pattern, content)
-    for result in results:
-        url, name, author, date = result
-        author = re.sub('\s', '', author)
-        date = re.sub('\s', '', date)
-        print(url, name, author, date)
+    # pattern = re.compile(
+    #     '<li.*?cover.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(.*?)</span>.*?</li>',
+    #     re.S)
+    # results = re.findall(pattern, content)
+    # for result in results:
+    #     url, name, author, date = result
+    #     author = re.sub('\s', '', author)
+    #     date = re.sub('\s', '', date)
+    #     print(url, name, author, date)
+content = requests.get('https://book.douban.com/').text
+print(type(content))
+pattern = re.compile('<li.*?cover.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(.*?)</span>.*?</li>', re.S)
+results = re.findall(pattern, content)
+print(results)
